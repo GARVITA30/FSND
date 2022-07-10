@@ -1,6 +1,14 @@
 The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies.
 
-To run the server:
+Create Virtual environment
+1. python -m venv venv
+2. source venv/Scripts/activate
+3. where python
+
+Install Dependancies:
+pip install -r requirements.txt
+
+Run The Server:
 1. source setup.sh
 2. export FLASK_APP=app.py
 3. export FLASK_ENV=development

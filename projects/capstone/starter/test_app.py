@@ -13,7 +13,7 @@ class CATestCase(unittest.TestCase):
         DB_URL = "postgresql://postgres:gravity@localhost:5432/postgres"        
         self.app = create_app()
         self.client = self.app.test_client
-        setup_db(self.app, self.DB_PATH)
+        setup_db(self.app, DB_URL)
 
         # binds the app to the current context
         with self.app.app_context():
@@ -58,17 +58,17 @@ class CATestCase(unittest.TestCase):
             self.assertEqual(res.status_code, 200)
             self.assertEqual(data['success'], True)
 
-    def test_404_add_actor(self):
+    def test_401_add_actor(self):
         test_actor = {}
         res = self.client().post('/actors', json = test_actor)
         data = json.loads(res.data)
-        self.assertEqual(res.status_code, 404)
+        self.assertEqual(res.status_code, 401)
         self.assertEqual(data['success'], False)
 
     def test_delete_actor(self):
         res = self.client().delete('/actor/1')
         data = json.loads(res.data)
-        actor = Actor.query.filter(Actor.id == 14).one_or_none()
+        actor = Actor.query.filter(Actor.id == 1).one_or_none()
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertEqual(actor, None)

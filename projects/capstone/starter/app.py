@@ -131,11 +131,11 @@ def create_app(test_config = None):
   @requires_auth('delete:actor')
   def delete_actor(actor_id):
       try:
-          question = Actor.query.get(actor_id)
-          question.delete()
+          actor = Actor.query.get(actor_id)
+          actor.delete()
           return jsonify({
               'success': True,
-              'deleted_question': actor_id
+              'deleted_actor': actor_id
           })
       except BaseException:
           abort(404)
